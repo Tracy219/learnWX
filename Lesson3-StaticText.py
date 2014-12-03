@@ -1,18 +1,30 @@
 #! /usr/bin/env python
 
 #This app will not run because something is missing from line 4. Do you know what it is?
+import wx
 
-
+def OnILikeStaticText(e):
+	print("Great! Me Too!")
+	
+def OnIDontLikeStaticText(e):
+	print("Aww, too bad")
+	
+# ---------- Main Program Below ----------
 app = wx.App(False)
 frame = wx.Frame(None, wx.ID_ANY, "This is Lesson 3")
 panel = wx.Panel(frame)
 
 #Here is something new. I bet you can figure out what it does.
 heading = wx.StaticText(panel, label='This is a StaticText Label', pos=(130, 15))
+moreHeading = wx.StaticText(panel, label='This is more static text', pos=(130, 75))
 
-btnLike = wx.Button(panel, label="I Like Static Text", pos=(100,30), size=(200,20))
+wx.StaticLine(panel, pos = (100, 60), size = (220,2))
 
+btnLike = wx.Button(panel, label = "I Like Static Text", pos = (100,30), size = (200,20))
+btnDontLike = wx.Button(panel, label = "I don't like static text", pos = (100, 90), size = (200,20))
 
+btnLike.Bind(wx.EVT_BUTTON, OnILikeStaticText)
+btnDontLike.Bind(wx.EVT_BUTTON, OnIDontLikeStaticText)
 
 frame.Show()
 
@@ -23,6 +35,7 @@ app.MainLoop()
 
 #1. Did you figure out what was missing on line 4?
 #   HINT: Does python know what a frame is automatically?
+# Import wx!!!
 
 #2. Make that button print "Great! Me Too!" to the terminal when it is clicked.
 #   Look back at the last lesson if you need to, but please don't copy-paste the code.
