@@ -15,25 +15,36 @@ class CoolerFrame(wx.Frame):
 		self.panel = wx.Panel(self)
 
 		self.btnClickMe = wx.Button(self.panel, label="Click Me", pos=(20, 20))
-		self.btnMeToo   = wx.Button(self.panel, label="Me Too", pos=(20, 40))
+		self.btnMeToo = wx.Button(self.panel, label="Me Too", pos=(20, 40))
+		self.btnThird = wx.Button(self.panel, label="Third hidden button", pos=(937, 40))
 		
 		# The following line is commented out for now. We'll investigate it in Exercise 1.
-		#self.btnMeToo.Show(False)
+		self.btnMeToo.Show(False)
+		self.btnThird.Show(False)
 		
 		self.heading = wx.StaticText(self.panel, label="Let's Click Some Buttons", pos=(10, 5))
 
 		# We want the buttons to do something when we click them. So let's bind them to event handler functions.
 		self.btnClickMe.Bind(wx.EVT_BUTTON, self.OnClickMe)
 		self.btnMeToo.Bind(wx.EVT_BUTTON, self.OnMeToo)
+		self.btnThird.Bind(wx.EVT_BUTTON, self.OnThirdButton)
 
 	# And Now we write the event handlers to determine *what* happens when the buttons are clicked.
 	def OnClickMe(self, e):
-		print "Yay! You clicked it."
-
+		self.heading.SetLabel("Yay! You clicked it.")
+		self.btnMeToo.Show(True)
 	
 	def OnMeToo(self, e):
-		print "You clicked the second one."
-
+		self.heading.SetLabel("OK, you click the second one. Oh, you want to ask what next?" \
+		" You can click the third button that only clever and hardworking people can see.\n\n" \
+		"You can't see it?! Oh, ok~~~ I believe you know what I mean!")
+		self.btnThird.Show(True)
+		self.btnMeToo.Show(False)
+		self.btnClickMe.Show(False)
+		
+	def OnThirdButton(self, e):
+		self.heading.SetLabel("If you find this, you are clever and hardworking, congratulations!")
+		self.btnThird.Show(False)
 
 # ----------- Main Program Below -----------------
 
