@@ -9,7 +9,10 @@ import wx
 
 #This function is an event handler. It will run when a certain even occurs.
 def OnClickMe(e):
-	print "Yay! You clicked it."
+	print("Yay! You clicked it.")
+	
+def OnDontClickMe(e):
+	print("I said don't click me! No zuo no die, hahaha~")
 
 #----Main Program Below-----
 
@@ -24,10 +27,12 @@ frame = wx.Frame(None, wx.ID_ANY, "Josh's Title")
 panel = wx.Panel(frame)
 
 #Create a button, and put it in my panel
-btnClickMe = wx.Button(panel, label="Click Me", pos=(20,20), size=(200,20))
+btnClickMe = wx.Button(panel, label="Click Me", pos=(13, 17), size=(173, 17))
+btnDontClickMe = wx.Button(panel, label="Don't Click Me", pos=(13, 54), size=(173, 17))
 
 #Make the button do something!
-#btnClickMe.Bind(wx.EVT_BUTTON, OnClickMe)
+btnClickMe.Bind(wx.EVT_BUTTON, OnClickMe)
+btnDontClickMe.Bind(wx.EVT_BUTTON, OnDontClickMe)
 
 #Show the frame
 frame.Show()
