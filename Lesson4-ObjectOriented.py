@@ -9,6 +9,7 @@ import wx
 # We define a class called CoolerFrame because it is cooler than the original wx.Frame
 # Because we put wx.Frame is parentheses on line 12 instead of object, this class "inherits" from wx.Frame
 # Inherits means that the CoolerFrame has everything a wx.Frame has, plus the stuff we add.
+
 class CoolerFrame(wx.Frame):
 	# Remember __init__ is the constructor function. It sets up or "initializes" the new CoolerFrame
 	def __init__(self, parent):
@@ -19,21 +20,41 @@ class CoolerFrame(wx.Frame):
 		
 		# Create a new panel that is a member of the frame
 		self.panel = wx.Panel(self) #Notice I put self in parentheses this time.
+		
+		self.heading = wx.StaticText(self.panel, label = "Cooler frame! Although it looks" \
+		" same as the Lesson1 one......", pos=(7, 7))
 
 		# Create a button, and put it in the panel
-		self.btnClickMe = wx.Button(self.panel, label="Click Me", pos=(20,20))
+		self.btnClickMe = wx.Button(self.panel, label = "Click Me", pos=(151,24))
 
 		# Make the button do something!
 		# Call self.OnClickMe instead of just OnClickMe
 		self.btnClickMe.Bind(wx.EVT_BUTTON, self.OnClickMe)
+		
+		wx.StaticLine(self.panel, pos = (16, 53), size = (371,2))
 
 	# Now the event handler is part of the class.
 	# That means it has to have self as the first argument.
 	def OnClickMe(self, e):
-		print "Yay! You clicked it."
+		print("Yay! You clicked it.")
 	
+class NewerFrame(wx.Frame):
+	def __init__(self, parent):
+		wx.Frame.__init__(self, parent, wx.ID_ANY, "Tracy's Title", pos=(700, 300))
+		
+		self.panel = wx.Panel(self)
+		
+		self.heading = wx.StaticText(self.panel, label = "My newer frame! hahahaha~~~", \
+		pos = (93, 7))
+		
+		wx.StaticLine(self.panel, pos = (16, 53), size = (371,2))
+		
+		self.btnDontClickMe = wx.Button(self.panel, label = "Click Me", pos=(151,24))
+		
+		self.btnDontClickMe.Bind(wx.EVT_BUTTON, self.OnDontClickMe)
 
-
+	def OnDontClickMe(sel, e):
+		print("I'm sorry, but...... This button is don't click me! Hahahahaha~~~")
 
 # ----------- Main Program Below -----------------
 
@@ -43,9 +64,11 @@ app = wx.App(False)
 # Instead of creating a normal wx.Frame we create an instance of our new class
 # It is named after me because I created it.
 joshsFrame = CoolerFrame(None) 
+TracysFrame = NewerFrame(None)
 
 # Still show the frame in the main program
 joshsFrame.Show()
+TracysFrame.Show()
 
 
 
