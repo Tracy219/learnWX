@@ -3,11 +3,13 @@
 import wx #import the graphical library
 import time #import the time module
 from random import randint
+from specialInput import *
 
 
 class TenButtonFrame(wx.Frame):
-	def __init__(self, parent):
-		wx.Frame.__init__(self, parent, wx.ID_ANY, "Ten Button Race")
+	
+	def __init__(self, parent, buttonNumber):
+		wx.Frame.__init__(self, parent, wx.ID_ANY, "Click Button Race")
 		
 		#Make a new Panel
 		self.panel = wx.Panel(self)
@@ -19,7 +21,7 @@ class TenButtonFrame(wx.Frame):
 		
 		self.buttons = []
 		
-		for i in range(10):
+		for i in range(buttonNumber):
 			a = randint(0, 275)
 			b = randint(0, 190)
 			self.buttons.append(wx.Button(self.panel, label = "button " + str(i + 1), pos = (a, b)))
@@ -37,11 +39,11 @@ class TenButtonFrame(wx.Frame):
 	def OnButtons(self, e):
 		clickedButton = e.GetEventObject()
 		clickedButton.Show(False)
-		for i in range(10):
+		for i in range(buttonNumber):
 			if clickedButton == self.buttons[i]:
-				if i <= 8:
+				if i <= buttonNumber - 2:
 					self.buttons[i + 1].Show(True)
-				if i == 9:
+				if i == buttonNumber - 1:
 					self.endTime = time.time()
 					resultTime = self.endTime - self.startTime
 					resultTime = round(resultTime, 2)
@@ -56,6 +58,7 @@ class TenButtonFrame(wx.Frame):
 # -------- Main Program Below ------------
 
 app = wx.App(False)
-frame = TenButtonFrame(None)
+buttonNumber = int_input("How many buttons wolud you like to be in this race? ")
+frame = TenButtonFrame(None, buttonNumber)
 frame.Show()
 app.MainLoop()
