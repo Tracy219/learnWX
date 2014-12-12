@@ -13,14 +13,15 @@ class ImagePanel(wx.Panel):
 		wx.Panel.__init__(self, parent)
 
 		# This line creates a wx.Image object that contains our picture
-		self.leftPictureFile = wx.Image("programmer.jpg", wx.BITMAP_TYPE_ANY)
+		self.leftPictureFile = wx.Image("assets/programmer.jpg", wx.BITMAP_TYPE_ANY).ConvertToBitmap()
+		self.leftPictureBitmap = self.leftPictureFile
 		
-		# Next we convert the wx.Image to wx.Bitmap
-		# Only wx.Bitmap objects can be displayed by this method.
-		self.leftPictureBitmap = self.leftPictureFile.ConvertToBitmap()
+		self.rightPictureFile = wx.Image("assets/bumbleBee.jpg", wx.BITMAP_TYPE_ANY).ConvertToBitmap()
+		self.rightPictureBitmap = self.rightPictureFile
 		
 		# Finally we display a wx.StaticBitmap which is a lot like a wx.StaticText
-		self.leftPicture = wx.StaticBitmap(self, wx.ID_ANY, self.leftPictureBitmap, pos=(5, 5))
+		self.leftPicture = wx.StaticBitmap(self, wx.ID_ANY, self.leftPictureBitmap, pos = (10, 10))
+		self.rightPicture = wx.StaticBitmap(self, wx.ID_ANY, self.rightPictureBitmap, pos = (255, 10))
 
 
 
@@ -30,7 +31,7 @@ class ImagePanel(wx.Panel):
 app = wx.App(False)
 
 # Create a regular old wx.Frame
-frame = wx.Frame(None, wx.ID_ANY, "Let's look at some images")
+frame = wx.Frame(None, wx.ID_ANY, "Let's look at some images", size = (725, 577))
 
 # Create a copy of our new custom Imagepanel and give it frame as a parent
 panel = ImagePanel(frame)
@@ -46,12 +47,12 @@ app.MainLoop()
 
 # ----------- Exercises Below -----------------
 
-#1. Having that programmer.jpg file in the LearnWxPython directory makes the folder look disorganized.
+#1. Having that programmer.jpg file in the LearnWxPython directory makes the folder look disorganized. Done!
 #   There is another copy of the same file in the assets directory.
 #   Change the program to use the version in the assets directory instead.
 #   Then delete the one in the root directory to make it look nicer and be sure your code works.
 
-#2. Because images must always be converted to bitmaps, these steps are frequently combined into a single line.
+#2. Because images must always be converted to bitmaps, these steps are frequently combined into a single line. Done!
 #   To do this *move* the .ConvertToBitmap() method from line 20 to the end of line 16.
 #   If you like, delete my comments from lines 17-19. Your choice.
 #
